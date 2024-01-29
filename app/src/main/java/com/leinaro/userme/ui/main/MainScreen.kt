@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -18,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.leinaro.userme.R
 import com.leinaro.userme.ui.contactlist.ContactListScreen
 import com.leinaro.userme.ui.contactlist.ContactListViewState
 import com.leinaro.userme.ui.contactlist.UserContact
@@ -30,7 +32,6 @@ fun MainScreen(
     navController: NavHostController = rememberNavController(),
 ) {
     var title by remember { mutableStateOf("") }
-//stringResource(string.contacts)
 
     Scaffold(
         topBar = {
@@ -46,6 +47,7 @@ fun MainScreen(
             startDestination = Routes.ContactList.route
         ) {
             composable(Routes.ContactList.route) {
+                title = stringResource(R.string.contacts)
                 ContactListScreen(
                     navController = navController,
                     state = ContactListViewState(
