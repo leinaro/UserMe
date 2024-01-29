@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">Userme</string>
+  <string name="contacts">CONTACTOS</string>
+  <string name="profile_picture_name">Foto de %1$s</string>
+</resources>
