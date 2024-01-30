@@ -92,6 +92,10 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
 
+    // Pagination
+    implementation("androidx.paging:paging-runtime:3.2.0-alpha06")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha20")
+
     // Projects
     implementation(project(":architecture"))
 

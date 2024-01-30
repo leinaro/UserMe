@@ -1,7 +1,13 @@
 package com.leinaro.userme.data.repository
 
+import android.provider.SyncStateContract.Constants
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.leinaro.userme.data.mapper.toDomain
 import com.leinaro.userme.data.model.UserContact
 import com.leinaro.userme.data.remote.RemoteDataSource
+import com.leinaro.userme.data.remote.UserContactPagingSource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -10,36 +16,30 @@ import java.util.Locale
 import javax.inject.Inject
 
 class UserMeRepository @Inject constructor(
-    private val remoteDataSource: RemoteDataSource,
+    private val userContactPagingSource: UserContactPagingSource,
+   // private val remoteDataSource: RemoteDataSource,
     //private val localDataSource: LocalDataSource,
 ) {
-    fun getUserContactList(): Flow<List<UserContact>> {
+    /*fun getUserContactList(): Flow<List<UserContact>> {
         return flow {
-            val contactList = remoteDataSource.getUserContactList().map {
-
-                val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-                val targetFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-
-                val formattedDate = try {
-                    originalFormat.parse(it.registered.date)?.let { date ->
-                        targetFormat.format(date)
-                    }
-                } catch (e:Exception){
-                    it.registered.date
-                }.orEmpty()
-
-                UserContact(
-                    id = it.id.value.orEmpty(),
-                    name = "${it.name.first} ${it.name.last}",
-                    email = it.email,
-                    profilePicture = it.picture.large,
-                    genre = it.gender,
-                    registerDate = formattedDate,
-                    phone = it.phone,
-                )
+            val contactList = remoteDataSource.getUserContactList()
+                .results
+            .filter {
+                it.id.value.isNullOrEmpty().not()
+            }.map {
+                it.toDomain()
             }
 
             emit(contactList)
         }
+    }*/
+
+    fun getUserContactList(): Flow<PagingData<UserContact>> {
+        return Pager(
+            config = PagingConfig(pageSize = 30),
+            pagingSourceFactory = {
+                userContactPagingSource
+            }
+        ).flow
     }
 }

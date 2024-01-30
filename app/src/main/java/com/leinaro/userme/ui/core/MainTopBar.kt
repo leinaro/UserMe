@@ -49,23 +49,12 @@ fun MainTopBar(
 ) {
     val currentBackState by navController.currentBackStackEntryAsState()
 
-    var color = if (currentBackState?.destination?.route == Routes.ContactDetails.route) {
+    val color = if (currentBackState?.destination?.route == Routes.ContactDetails.route) {
         Color.White
     }
     else {
         Color.Black
     }
-
-    /*LaunchedEffect(key1 = currentBackState){
-        Log.i("iarl", "---> currentBackState: ${currentBackState?.destination?.route}")
-        color = if (currentBackState?.destination?.route == Routes.ContactDetails.route) {
-            Color.White
-        }
-        else {
-            Color.Black
-        }
-    }*/
-    Log.i("iarl", "currentBackState: ${currentBackState}")
 
     TopAppBar(
         scrollBehavior = scrollBehavior,

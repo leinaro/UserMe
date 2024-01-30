@@ -7,14 +7,24 @@ const val API = "/api/"
 
 interface UserMeApi {
     @GET(API)
-    suspend fun getUsers(@Query("results") results:Int): UserMeResponse
+    suspend fun getUsers(
+        @Query("results") size: Int,
+        @Query("page") page: Int = 1,
+        @Query("seed") seed: String = "9ddbbc1613d70f16",
+    ): UserMeResponse
 }
 
 data class UserMeResponse(
     val results: List<UserContactResponse>,
-    //val page: Int,
+    val info: InfoResponse,
 )
 
+data class InfoResponse(
+    val seed: String,
+    val results: Int,
+    val page: Int,
+    val version: String,
+)
 data class UserContactResponse(
     val gender: String,
     val name: NameResponse,
