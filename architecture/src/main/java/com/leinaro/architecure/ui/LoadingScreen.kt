@@ -24,10 +24,7 @@ fun LoadingScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxWidth()
     ) {
-        CircularProgressIndicator(
-            //  color = MaterialTheme.colorScheme.secondary,
-            //trackColor = MaterialTheme.colorScheme.surfaceVariant,
-        )
+        CircularProgressIndicator()
         Text(
             modifier = Modifier.padding(24.dp),
             textAlign = TextAlign.Center,

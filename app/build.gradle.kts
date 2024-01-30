@@ -100,6 +100,10 @@ dependencies {
     implementation(project(":architecture"))
 
     // Unit Tests
+
+    // Pagination
+    testImplementation("androidx.paging:paging-common:3.2.0-alpha06")
+
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.dagger:hilt-android-testing:2.44")
     kaptTest("com.google.dagger:hilt-android-compiler:2.44")

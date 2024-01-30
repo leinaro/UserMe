@@ -30,6 +30,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import androidx.paging.compose.items
+import com.leinaro.architecure.ui.ErrorScreen
 import com.leinaro.architecure.ui.LoadingScreen
 import com.leinaro.userme.R
 import com.leinaro.userme.R.string
@@ -86,10 +87,11 @@ fun ContactListScreen(
                 loadState.refresh is LoadState.Error -> {
                     val error = contactList.loadState.refresh as LoadState.Error
                     item {
-                        ErrorMessage(
+                        ErrorScreen(
                             modifier = Modifier.fillParentMaxSize(),
-                            message = error.error.localizedMessage?: stringResource(id = R.string.default_error),
-                            onClickRetry = { retry() })
+                            message = stringResource(string.default_error),
+                            onClickRetry = { retry() }
+                        )
                     }
                 }
 
@@ -100,9 +102,9 @@ fun ContactListScreen(
                 loadState.append is LoadState.Error -> {
                     val error = contactList.loadState.append as LoadState.Error
                     item {
-                        ErrorMessage(
-                            modifier = Modifier,
-                            message = error.error.localizedMessage!!,
+                        ErrorScreen(
+                            modifier = Modifier.fillParentMaxSize(),
+                            message = stringResource(string.default_error),
                             onClickRetry = { retry() }
                         )
                     }
@@ -134,37 +136,5 @@ fun LoadingNextPageItem(modifier: Modifier) {
             .fillMaxWidth()
             .padding(10.dp)
             .wrapContentWidth(Alignment.CenterHorizontally)
-    )
-}
-
-@Composable
-fun ErrorMessage(
-    message: String,
-    modifier: Modifier = Modifier,
-    onClickRetry: () -> Unit
-) {
-    Row(
-        modifier = modifier.padding(10.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = message,
-            color = MaterialTheme.colorScheme.error,
-            modifier = Modifier.weight(1f),
-            maxLines = 2
-        )
-        OutlinedButton(onClick = onClickRetry) {
-            Text(text = "Reintentar")
-        }
-    }
-}
-
-@Preview
-@Composable
-fun ErrorMessagePreview() {
-    ErrorMessage(
-        message = "Error al cargar los datos",
-        onClickRetry = {}
     )
 }

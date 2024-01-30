@@ -42,17 +42,7 @@ data class NameResponse(
 )
 
 data class LocationResponse(
-    val street: StreetResponse,
-    val city: String,
-    val state: String,
-    val country: String,
     val coordinates: CoordinatesResponse,
-    val timezone: TimezoneResponse,
-)
-
-data class StreetResponse(
-    val number: Int,
-    val name: String,
 )
 
 data class CoordinatesResponse(
@@ -60,14 +50,8 @@ data class CoordinatesResponse(
     val longitude: String,
 )
 
-data class TimezoneResponse(
-    val offset: String,
-    val description: String,
-)
-
 data class RegisteredResponse(
     val date: String,
-    val age: Int,
 )
 
 data class PictureResponse(
@@ -77,6 +61,5 @@ data class PictureResponse(
 )
 
 data class IdResponse(
-    val name: String,
     val value: String?,
 )
