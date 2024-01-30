@@ -2,4 +2,5 @@
   <string name="app_name">Userme</string>
   <string name="contacts">CONTACTOS</string>
   <string name="profile_picture_name">Foto de %1$s</string>
+  <string name="default_error">¡Oops! Parece que algo inesperado ha pasado. ¡Vuelve a intentarlo!</string>
 </resources>

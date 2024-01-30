@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Userme"
 include(":app")
- 
+include(":architecture")

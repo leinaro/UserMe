@@ -1,5 +1,6 @@
 package com.leinaro.userme.ui.contactlist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,15 +35,17 @@ import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
 import com.leinaro.userme.R.string
+import com.leinaro.userme.data.model.UserContact
 
 @Composable fun UserContactItem(
     userContact: UserContact,
+    onUserContactClick: (UserContact) -> Unit = {},
 ) {
     Row(
         Modifier
-            .padding(vertical = 16.dp)
             .padding(start = 16.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { onUserContactClick(userContact) },
         horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.Start),
         verticalAlignment = Alignment.Top,
     ) {

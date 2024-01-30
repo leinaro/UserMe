@@ -20,15 +20,16 @@ import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.leinaro.userme.R
+import com.leinaro.userme.data.model.UserContact
 import com.leinaro.userme.ui.contactlist.ContactListScreen
-import com.leinaro.userme.ui.contactlist.ContactListViewState
-import com.leinaro.userme.ui.contactlist.UserContact
 import com.leinaro.userme.ui.core.MainTopBar
 import com.leinaro.userme.ui.theme.UsermeTheme
+import com.leinaro.userme.ui.usercontactdetails.UserContactDetails
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
+    state: ContactListViewState,
     navController: NavHostController = rememberNavController(),
 ) {
     var title by remember { mutableStateOf("") }
@@ -50,26 +51,23 @@ fun MainScreen(
                 title = stringResource(R.string.contacts)
                 ContactListScreen(
                     navController = navController,
-                    state = ContactListViewState(
-                        contactList = listOf(
-                            UserContact(
-                                id = 0,
-                                name = "Andrés Martínez",
-                                email="andres.mart@gmail.com",
-                                profilePicture="https://picsum.photos/200"
-                            )
-                        )
-                    )
+                    contactList = state.contactList,
                 )
             }
-            dialog(
+            composable(
                 Routes.ContactDetails.route,
-                arguments = listOf(navArgument("billId") { type = NavType.LongType })
+               // arguments = listOf(navArgument("billId") { type = NavType.LongType })
             ){backStackEntry ->
-               /* BillDetailsScreen(
+                UserContactDetails(
                     navController = navController,
-                    billId = backStackEntry.arguments?.getLong("billId") ?: throw NullPointerException()
-                )*/
+                    userContact = UserContact(
+                        id = 0,
+                        name = "Andrés Martínez",
+                        email="",
+                        profilePicture = "",
+                    )
+                 //   userContact = backStackEntry.arguments?.getLong("billId") ?: throw NullPointerException()
+                )
             }
             dialog("detail_dialog") {
                 // This content will be automatically added to a Dialog() composable
@@ -84,7 +82,18 @@ fun MainScreen(
 @Composable
 fun MainScreenPreview() {
     UsermeTheme {
-        MainScreen()
+        MainScreen(
+            state = ContactListViewState(
+                contactList = listOf(
+                    UserContact(
+                        id = 0,
+                        name = "Andrés Martínez",
+                        email="andres.mart@gmail.com",
+                        profilePicture="https://picsum.photos/200"
+                    )
+                )
+            )
+        )
     }
 }
 
