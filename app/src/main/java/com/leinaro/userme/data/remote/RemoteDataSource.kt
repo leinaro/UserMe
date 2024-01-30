@@ -1,11 +1,11 @@
 package com.leinaro.userme.data.remote
 
-import com.leinaro.userme.data.model.UserContact
-import kotlinx.coroutines.flow.Flow
+import com.leinaro.userme.data.remote.api.UserMeApi
 import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor(){
-    /*fun getUserContactList(): Flow<List<UserContact>> {
-        //TODO("Not yet implemented")
-    }*/
+class RemoteDataSource @Inject constructor(
+    private val userMeApi: UserMeApi,
+){
+    suspend fun getUserContactList() = userMeApi.getUsers(10).results
 }
+

@@ -86,6 +86,12 @@ dependencies {
     kapt("com.google.dagger:hilt-compiler:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
+    // Network
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
+
     // Projects
     implementation(project(":architecture"))
 
