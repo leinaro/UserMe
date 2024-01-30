@@ -100,7 +100,7 @@ fun UserContactDetails(
 private fun UserContactDetailsPreview(){
     UserContactDetails(
         userContact = UserContact(
-            id = 0,
+            id = "0",
             name = "Andrés Martínez",
             email="andres.mart@gmail.com",
             profilePicture="https://picsum.photos/200",

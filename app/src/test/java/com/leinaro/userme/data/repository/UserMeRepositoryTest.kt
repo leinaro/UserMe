@@ -6,67 +6,67 @@ class UserMeRepositoryTest{}
 
 val contactlist =listOf(
 UserContact(
-id = 0,
+id = "0",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"
 ),
 UserContact(
-id = 1,
+id = "1",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"
 ),
 UserContact(
-id = 2,
+id = "2",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"
 ),
 UserContact(
-id = 3,
+id = "3",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"
 ),
 UserContact(
-id = 4,
+id = "4",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"
 ),
 UserContact(
-id = 5,
+id = "5",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"
 ),
 UserContact(
-id = 6,
+id = "6",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"
 ),
 UserContact(
-id = 7,
+id = "7",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"
 ),
 UserContact(
-id = 8,
+id = "8",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"
 ),
 UserContact(
-id = 9,
+id = "9",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"
 ),
 UserContact(
-id = 10,
+id = "10",
 name = "Andrés Martínez",
 email="andres.mart@gmail.com",
 profilePicture="https://picsum.photos/200"

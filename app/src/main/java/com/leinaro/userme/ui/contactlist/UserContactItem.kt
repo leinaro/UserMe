@@ -123,7 +123,7 @@ import com.leinaro.userme.data.model.UserContact
 private fun UserContactItemPreview(){
     UserContactItem(
         UserContact(
-            id = 0,
+            id = "0",
             name = "Andrés Martínez",
             email="andres.mart@gmail.com",
             profilePicture="https://picsum.photos/200"
@@ -195,7 +195,7 @@ private fun UserContactItemPreview(){
 private fun UserContactItemAlternativePreview(){
     UserContactItemAlternative(
         UserContact(
-            id = 0,
+            id = "0",
             name = "Andrés Martínez",
             email="andres.mart@gmail.com",
             profilePicture="https://picsum.photos/200"

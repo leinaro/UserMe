@@ -92,7 +92,7 @@ fun MainTopBar(
             }
         },
         actions = {
-            IconButton(onClick = { navController.navigate("detail_dialog") }) {
+            IconButton(onClick = { navController.navigate(Routes.Info.route) }) {
                 Icon(
                     imageVector = Filled.MoreVert,
                     contentDescription = "Localized description",

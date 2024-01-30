@@ -23,6 +23,11 @@ class UserMeViewModel @Inject constructor(
             }
         }
     }
+
+    fun getUser(userId: String?): UserContact? {
+        val contactViewState = (state.value as? Loaded<ContactListViewState>)?.data
+        return contactViewState?.contactList?.firstOrNull { it.id == userId }
+    }
 }
 
 data class ContactListViewState(

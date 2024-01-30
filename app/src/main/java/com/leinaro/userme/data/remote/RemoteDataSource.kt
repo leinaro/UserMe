@@ -7,5 +7,8 @@ class RemoteDataSource @Inject constructor(
     private val userMeApi: UserMeApi,
 ){
     suspend fun getUserContactList() = userMeApi.getUsers(10).results
+        .filter {
+            it.id.value.isNullOrEmpty().not()
+        }
 }
 

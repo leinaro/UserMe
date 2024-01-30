@@ -37,7 +37,9 @@ fun ContactListScreen(
             UserContactItem(
                 userContact = userContact,
                 onUserContactClick = {
-                    navController.navigate(Routes.ContactDetails.route)
+                    navController.navigate(
+                        Routes.ContactDetails.route.replace("{userId}", userContact.id)
+                    )
                 }
             )
         }
@@ -50,7 +52,7 @@ private fun ContactListScreenPreview(){
     ContactListScreen(
         contactList = listOf(
             UserContact(
-                id = 0,
+                id = "0",
                 name = "Andrés Martínez",
                 email="andres.mart@gmail.com",
                 profilePicture="https://picsum.photos/200"

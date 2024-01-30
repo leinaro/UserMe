@@ -15,15 +15,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.leinaro.userme.R
 import com.leinaro.userme.data.model.UserContact
 import com.leinaro.userme.ui.contactlist.ContactListScreen
 import com.leinaro.userme.ui.core.MainTopBar
+import com.leinaro.userme.ui.info.Developer
+import com.leinaro.userme.ui.info.InfoScreen
 import com.leinaro.userme.ui.theme.UsermeTheme
 import com.leinaro.userme.ui.usercontactdetails.UserContactDetails
 
@@ -32,20 +37,21 @@ import com.leinaro.userme.ui.usercontactdetails.UserContactDetails
 fun MainScreen(
     state: ContactListViewState,
     navController: NavHostController = rememberNavController(),
-) {
+    viewModel: UserMeViewModel = viewModel()
+    ) {
     var title by remember { mutableStateOf("") }
 
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+   // val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
         topBar = {
             MainTopBar(
                 navController = navController,
                 title = title,
-                scrollBehavior = scrollBehavior
+               // scrollBehavior = scrollBehavior
             )
         },
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+     //   modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
     ) { paddingValues ->
         NavHost(
             modifier = Modifier.fillMaxSize(),
@@ -62,29 +68,22 @@ fun MainScreen(
             }
             composable(
                 Routes.ContactDetails.route,
-               // arguments = listOf(navArgument("billId") { type = NavType.LongType })
+                arguments = listOf(navArgument("userId") { type = NavType.StringType })
             ){backStackEntry ->
-                title = "Andrés Martínez"
+                val userId = backStackEntry.arguments?.getString("userId") ?: throw NullPointerException("User id not found")
+                val userContact = viewModel.getUser(userId)?.copy() ?: throw NullPointerException("User with id $userId not found")
+
+                title = userContact.name
                 UserContactDetails(
                     navController = navController,
-                    userContact = UserContact(
-                        id = 0,
-                        name = "Andrés Martínez",
-                        email="andres.mart@gmail.com",
-                        profilePicture="https://picsum.photos/200",
-                        genre = "Hombre",
-                        registerDate = "2021-09-01T00:00:00.000Z",
-                        phone = "123456789",
-                        latitude = 0.0,
-                        longitude = 0.0,
-                    )
+                    userContact = userContact
                  //   userContact = backStackEntry.arguments?.getLong("billId") ?: throw NullPointerException()
                 )
             }
-            dialog("detail_dialog") {
-                // This content will be automatically added to a Dialog() composable
-                // and appear above the HomeScreen or other composable destinations
-                //InfoScreen(listOf(Developer("Inés Rojas", "https://www.linkedin.com/in/ingenieraadela/")))
+            dialog(Routes.Info.route) {
+                InfoScreen(listOf(
+                    Developer("Inés Rojas", "https://www.linkedin.com/in/ingenieraadela/", "https://github.com/leinaro")
+                ))
             }
         }
     }
@@ -98,7 +97,7 @@ fun MainScreenPreview() {
             state = ContactListViewState(
                 contactList = listOf(
                     UserContact(
-                        id = 0,
+                        id = "0",
                         name = "Andrés Martínez",
                         email="andres.mart@gmail.com",
                         profilePicture="https://picsum.photos/200"
@@ -111,6 +110,6 @@ fun MainScreenPreview() {
 
 sealed class Routes(val route: String) {
     object ContactList: Routes("contact-list")
-    object ContactDetails: Routes("contact-details")
+    object ContactDetails: Routes("contact-details/{userId}")
     object Info: Routes("info")
 }

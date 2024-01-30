@@ -1,7 +1,7 @@
 package com.leinaro.userme.data.model
 
 data class UserContact(
-    val id: Long = 0,
+    val id: String = "",
     val profilePicture: String,
     val name: String,
     val email: String,

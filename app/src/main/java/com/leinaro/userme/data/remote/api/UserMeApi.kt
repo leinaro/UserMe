@@ -23,7 +23,7 @@ data class UserContactResponse(
     val registered: RegisteredResponse,
     val phone: String,
     val picture: PictureResponse,
- //   val id: IdResponse,
+    val id: IdResponse,
 )
 
 data class NameResponse(
@@ -68,5 +68,5 @@ data class PictureResponse(
 
 data class IdResponse(
     val name: String,
-    val value: String,
+    val value: String?,
 )
