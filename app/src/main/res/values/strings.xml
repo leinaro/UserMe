@@ -3,4 +3,10 @@
   <string name="contacts">CONTACTOS</string>
   <string name="profile_picture_name">Foto de %1$s</string>
   <string name="default_error">¡Oops! Parece que algo inesperado ha pasado. ¡Vuelve a intentarlo!</string>
+  <string name="name_and_last_name">Nombre y apellidos</string>
+  <string name="email">Email</string>
+  <string name="genre">Género</string>
+  <string name="register_date">Fecha de registro</string>
+  <string name="phone">Teléfono</string>
+  <string name="address">Dirección</string>
 </resources>

@@ -4,21 +4,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.leinaro.userme.R
 import com.leinaro.userme.data.model.UserContact
 import com.leinaro.userme.ui.contactlist.ContactListScreen
@@ -34,22 +35,27 @@ fun MainScreen(
 ) {
     var title by remember { mutableStateOf("") }
 
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+
     Scaffold(
         topBar = {
             MainTopBar(
                 navController = navController,
                 title = title,
+                scrollBehavior = scrollBehavior
             )
-        }
+        },
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
     ) { paddingValues ->
         NavHost(
-            modifier = Modifier.fillMaxSize().padding(paddingValues),
+            modifier = Modifier.fillMaxSize(),
             navController = navController,
             startDestination = Routes.ContactList.route
         ) {
             composable(Routes.ContactList.route) {
                 title = stringResource(R.string.contacts)
                 ContactListScreen(
+                    modifier = Modifier.padding(paddingValues),
                     navController = navController,
                     contactList = state.contactList,
                 )
@@ -58,13 +64,19 @@ fun MainScreen(
                 Routes.ContactDetails.route,
                // arguments = listOf(navArgument("billId") { type = NavType.LongType })
             ){backStackEntry ->
+                title = "Andrés Martínez"
                 UserContactDetails(
                     navController = navController,
                     userContact = UserContact(
                         id = 0,
                         name = "Andrés Martínez",
-                        email="",
-                        profilePicture = "",
+                        email="andres.mart@gmail.com",
+                        profilePicture="https://picsum.photos/200",
+                        genre = "Hombre",
+                        registerDate = "2021-09-01T00:00:00.000Z",
+                        phone = "123456789",
+                        latitude = 0.0,
+                        longitude = 0.0,
                     )
                  //   userContact = backStackEntry.arguments?.getLong("billId") ?: throw NullPointerException()
                 )

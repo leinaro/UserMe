@@ -21,12 +21,13 @@ import com.leinaro.userme.ui.main.UserMeViewModel
 
 @Composable
 fun ContactListScreen(
+    modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     contactList: List<UserContact>,
-    //viewModel: UserMeViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
 ) {
 
     LazyColumn(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(19.dp),
     ) {
         item {
