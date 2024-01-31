@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +27,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.leinaro.userme.R
 import com.leinaro.userme.data.model.UserContact
 import com.leinaro.userme.ui.contactlist.ContactListScreen
+import com.leinaro.userme.ui.contactlist.SearchContactScreen
 import com.leinaro.userme.ui.core.MainTopBar
 import com.leinaro.userme.ui.info.Developer
 import com.leinaro.userme.ui.info.InfoScreen
@@ -42,12 +44,16 @@ fun MainScreen(
     var title by remember { mutableStateOf("") }
 
     val userContactItems: LazyPagingItems<UserContact> = viewModel.contactsState.collectAsLazyPagingItems()
+    val filteredUserContactItems: LazyPagingItems<UserContact> = viewModel.filterContactsState.collectAsLazyPagingItems()
+    var query by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
             MainTopBar(
                 navController = navController,
                 title = title,
+                query = query,
+                onValueChange = { query = it }
             )
         },
     ) { paddingValues ->
@@ -62,6 +68,17 @@ fun MainScreen(
                     modifier = Modifier.padding(paddingValues),
                     navController = navController,
                     contactList = userContactItems,
+                )
+            }
+            composable(Routes.Search.route) {
+                title = ""
+                LaunchedEffect(key1 = query){
+                    viewModel.getUsersByQuery(query)
+                }
+                SearchContactScreen(
+                    modifier = Modifier.padding(paddingValues),
+                    navController = navController,
+                    contactList = filteredUserContactItems,
                 )
             }
             composable(
@@ -113,5 +130,6 @@ fun MainScreenPreview() {
 sealed class Routes(val route: String) {
     object ContactList: Routes("contact-list")
     object ContactDetails: Routes("contact-details/{userId}/{index}")
+    object Search: Routes("search")
     object Info: Routes("info")
 }

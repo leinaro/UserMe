@@ -10,4 +10,5 @@
   <string name="phone">Teléfono</string>
   <string name="address">Dirección</string>
   <string name="loading_data_message">Los datos están siendo transferidos desde una galaxia distante.</string>
+  <string name="search_by">Buscar por nombre o email</string>
 </resources>

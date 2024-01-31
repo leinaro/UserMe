@@ -12,6 +12,8 @@ class UserContactPagingSource @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
 ) : PagingSource<Int, UserContact>() {
 
+    var query: String? = null
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UserContact> {
         return try {
             val currentPage = params.key ?: 1
@@ -20,7 +22,13 @@ class UserContactPagingSource @Inject constructor(
                 page = currentPage
             )
             LoadResult.Page(
-                data = response.results.map { it.toDomain() },
+                data = response.results
+                    .map { it.toDomain() }
+                    .filter { user ->
+                        query?.let { q ->
+                            user.name.contains(q) || user.email.contains(q)
+                        }?: true
+                    },
                 prevKey = if (currentPage == 1) null else currentPage - 1,
                 nextKey = if (response.results.isEmpty()) null else response.info.page + 1
             )

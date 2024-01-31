@@ -9,8 +9,8 @@ import javax.inject.Inject
 class GetUsersUseCase @Inject constructor(
     private val repository: UserMeRepository,
 ) {
-    operator fun invoke(): Flow<PagingData<UserContact>> {
-        return repository.getUserContactList()
+    operator fun invoke(query: String? = null): Flow<PagingData<UserContact>> {
+        return repository.getUserContactList(query = query)
     }
 }
 

@@ -2,7 +2,6 @@ package com.leinaro.userme.data.remote
 
 import com.leinaro.userme.data.remote.api.UserMeApi
 import com.leinaro.userme.data.remote.api.UserMeResponse
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(
@@ -15,7 +14,10 @@ class RemoteDataSource @Inject constructor(
         return userMeApi.getUsers(
             size = size,
             page = page,
-        )
+        ).apply {
+            results
+                .filter { it.id.value.isNullOrEmpty().not() }
+        }
     }
 }
 

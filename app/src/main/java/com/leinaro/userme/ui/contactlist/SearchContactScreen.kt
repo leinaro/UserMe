@@ -4,12 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -20,13 +16,12 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import com.leinaro.architecure.ui.ErrorScreen
-import com.leinaro.architecure.ui.LoadingScreen
 import com.leinaro.userme.R.string
 import com.leinaro.userme.data.model.UserContact
 import com.leinaro.userme.ui.main.Routes
 
 @Composable
-fun ContactListScreen(
+fun SearchContactScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     contactList: LazyPagingItems<UserContact>,
@@ -63,15 +58,15 @@ fun ContactListScreen(
 
         contactList.apply {
             when {
-                loadState.refresh is LoadState.Loading -> {
+                /*TODO: Empty state
+                   loadState.refresh is LoadState.Loading -> {
                     item { LoadingScreen(
                         modifier = Modifier.fillParentMaxSize(),
                         message = stringResource(string.loading_data_message)
                     ) }
-                }
+                }*/
 
                 loadState.refresh is LoadState.Error -> {
-                    val error = contactList.loadState.refresh as LoadState.Error
                     item {
                         ErrorScreen(
                             modifier = Modifier.fillParentMaxSize(),
@@ -98,29 +93,4 @@ fun ContactListScreen(
             }
         }
     }
-}
-/*
-@Composable
-@Preview
-private fun ContactListScreenPreview(){
-    ContactListScreen(
-        contactList = LazyPagingItems(PagingData.from(listOf(
-            UserContact(
-                id = "0",
-                name = "Andrés Martínez",
-                email="andres.mart@gmail.com",
-                profilePicture="https://picsum.photos/200"
-            )
-        )))
-    )
-}*/
-
-@Composable
-fun LoadingNextPageItem(modifier: Modifier) {
-    CircularProgressIndicator(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(10.dp)
-            .wrapContentWidth(Alignment.CenterHorizontally)
-    )
 }
