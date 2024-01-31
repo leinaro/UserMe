@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -95,6 +96,9 @@ dependencies {
     // Pagination
     implementation("androidx.paging:paging-runtime:3.2.0-alpha06")
     implementation("androidx.paging:paging-compose:1.0.0-alpha20")
+
+    // Maps
+    implementation ("com.google.maps.android:maps-compose:4.3.2")
 
     // Projects
     implementation(project(":architecture"))

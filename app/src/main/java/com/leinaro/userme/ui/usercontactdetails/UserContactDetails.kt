@@ -1,7 +1,10 @@
 package com.leinaro.userme.ui.usercontactdetails
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,9 +24,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.rememberCameraPositionState
 import com.leinaro.userme.R.drawable
 import com.leinaro.userme.R.string
 import com.leinaro.userme.data.model.UserContact
@@ -86,6 +94,17 @@ fun UserContactDetails(
             onValueChange = { phone = it },
             label = stringResource(string.phone),
             leadingIcon =  painterResource(id = drawable.ic_phone),
+        )
+
+        val singapore = LatLng(1.35, 103.87)
+        val cameraPositionState = rememberCameraPositionState {
+            position = CameraPosition.fromLatLngZoom(singapore, 10f)
+        }
+
+        GoogleMap(
+            modifier = Modifier.padding(start = 25.dp, end = 16.dp)
+                .fillMaxWidth().height(200.dp),
+            cameraPositionState = cameraPositionState
         )
     }
 }

@@ -8,6 +8,9 @@ cada uno.
 • Opción de busqueda de usuarios por nombre o email para filtrarlos.
 • Scroll infinito con paginación.
 
+## APK
+Puede instalar el apk que se encuentra en la carpeta apk/app-debug.apk
+
 ## Setup
 
 - Configurar el IDE para usar la version 17 JDK
@@ -17,6 +20,8 @@ cada uno.
 <img width="627" alt="Screenshot 2024-01-31 at 12 16 43 AM" src="https://github.com/leinaro/UserMe/assets/8811999/56324de8-fae5-4dae-afde-531480596a75">
 
 - Se recomeinda usar un dispositivo o emulador API 34.
+
+- Para asegurarse de ver el mapa correctamente, agregue al local.properties el siguiente un API key de google maps valido para el paquete com.leinaro.userme.
 
 ## Arquitectura y Patrones de diseño
 
