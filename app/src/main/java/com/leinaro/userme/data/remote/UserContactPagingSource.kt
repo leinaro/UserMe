@@ -25,7 +25,7 @@ class UserContactPagingSource @Inject constructor(
                 data = response.results
                     .map { it.toDomain() }
                     .filter { user ->
-                        query?.let { q ->
+                        user.id.isEmpty().not() && query?.let { q ->
                             user.name.contains(q) || user.email.contains(q)
                         }?: true
                     },
